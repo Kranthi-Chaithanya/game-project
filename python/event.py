@@ -31,7 +31,7 @@ class RelationshipEvent:
     source_character: "Character"
     target_character: "Character"
     description: str
-    timestamp: datetime = None  # type: ignore[assignment]
+    timestamp: datetime | None = None
 
     def __post_init__(self) -> None:
         if self.timestamp is None:

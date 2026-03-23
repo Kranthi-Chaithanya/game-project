@@ -26,7 +26,7 @@ _DEFAULT_RULES: dict[EventType, float] = {
 }
 
 
-def _intensity_to_type(intensity: float, character_is_mentor: bool = False) -> RelationshipType:
+def _intensity_to_type(intensity: float) -> RelationshipType:
     """Map an intensity value to a RelationshipType."""
     if intensity < -80:
         return RelationshipType.NEMESIS
