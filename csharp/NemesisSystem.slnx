@@ -1,0 +1,4 @@
+<Solution>
+  <Project Path="NemesisSystem.Tests/NemesisSystem.Tests.csproj" />
+  <Project Path="NemesisSystem/NemesisSystem.csproj" />
+</Solution>
