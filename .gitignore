@@ -1,0 +1,23 @@
+# Python
+__pycache__/
+*.py[cod]
+*.egg-info/
+.pytest_cache/
+dist/
+build/
+.venv/
+venv/
+
+# JavaScript / TypeScript
+node_modules/
+javascript/dist/
+
+# C# / .NET
+csharp/**/bin/
+csharp/**/obj/
+*.user
+
+# Godot
+gdscript/.import/
+gdscript/**/.godot/
+*.import
