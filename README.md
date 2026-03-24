@@ -230,6 +230,29 @@ See `gdscript/README.md` for more details and `gdscript/examples/example_usage.g
 
 ---
 
+## 🎮 Playable Demo Game — "Realm of Rivals"
+
+The `godot-game/` directory contains a fully playable **2D Strategy/Roguelike** demo built in **Godot 4.x (GDScript)** that integrates the relationship system into real gameplay.
+
+### Features
+- **Procedural tile-based maps** with settlements, dungeons, markets, and wilderness
+- **10+ NPCs** with unique names, roles, and personalities
+- **Turn-based combat** where relationships affect attack power, mercy chances, and flee success
+- **Dialogue & diplomacy** — trade, recruit, form alliances, betray, negotiate
+- **Faction management** — party of up to 4, morale affected by inter-member rivalries
+- **Roguelike legacy** — nemeses from previous runs return stronger and angrier
+- **Live relationship panel** — color-coded view of all relationships (press `R`)
+- **Event log** — every relationship change shown in real-time
+
+### How to Run
+1. Install [Godot 4.2+](https://godotengine.org/download)
+2. Open `godot-game/project.godot` in Godot
+3. Press **F5** to play
+
+See [`godot-game/README.md`](godot-game/README.md) for full documentation, controls, and gameplay mechanics.
+
+---
+
 ## Design Principles
 
 - **Universal** — Any character type can form relationships with any other; not limited to player↔villain.
@@ -284,14 +307,30 @@ game-project/
 │   │   └── eventSystem.test.ts
 │   ├── package.json
 │   └── tsconfig.json
-└── gdscript/
-    ├── README.md
-    ├── src/
-    │   ├── Character.gd
-    │   ├── Relationship.gd
-    │   ├── RelationshipManager.gd
-    │   ├── EventSystem.gd
-    │   └── ...
-    └── examples/
-        └── example_usage.gd
+├── gdscript/
+│   ├── README.md
+│   ├── src/
+│   │   ├── Character.gd
+│   │   ├── Relationship.gd
+│   │   ├── RelationshipManager.gd
+│   │   ├── EventSystem.gd
+│   │   └── ...
+│   └── examples/
+│       └── example_usage.gd
+└── godot-game/                    # 🎮 Playable demo game
+    ├── project.godot
+    ├── scenes/
+    │   └── main.tscn
+    ├── scripts/
+    │   ├── main.gd
+    │   ├── player.gd
+    │   ├── npc.gd
+    │   ├── combat_manager.gd
+    │   ├── dialogue_manager.gd
+    │   ├── map_generator.gd
+    │   ├── hud.gd
+    │   ├── faction_manager.gd
+    │   ├── legacy_manager.gd
+    │   └── relationship/          # Integrated from gdscript/src/
+    └── README.md
 ```
