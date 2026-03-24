@@ -21,3 +21,6 @@ csharp/**/obj/
 gdscript/.import/
 gdscript/**/.godot/
 *.import
+godot-game/.godot/
+godot-game/**/.import/
+godot-game/export_presets.cfg
