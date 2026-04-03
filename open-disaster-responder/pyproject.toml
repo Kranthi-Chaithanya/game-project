@@ -1,0 +1,56 @@
+[build-system]
+requires = ["setuptools>=68.0", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "open-disaster-responder"
+version = "1.0.0"
+description = "Real-Time Disaster Response Intelligence System — OpenEnv Environment"
+readme = "README.md"
+license = {text = "MIT"}
+requires-python = ">=3.10"
+authors = [
+    {name = "OpenEnv Developer"},
+]
+keywords = ["openenv", "disaster-response", "reinforcement-learning", "pytorch", "huggingface"]
+classifiers = [
+    "Development Status :: 4 - Beta",
+    "Intended Audience :: Science/Research",
+    "License :: OSI Approved :: MIT License",
+    "Programming Language :: Python :: 3",
+    "Programming Language :: Python :: 3.10",
+    "Programming Language :: Python :: 3.11",
+    "Topic :: Scientific/Engineering :: Artificial Intelligence",
+]
+
+dependencies = [
+    "numpy>=1.24.0",
+    "pydantic>=2.0.0",
+    "fastapi>=0.100.0",
+    "uvicorn>=0.23.0",
+    "gradio>=4.0.0",
+    "plotly>=5.15.0",
+    "torch>=2.0.0",
+    "scikit-learn>=1.3.0",
+    "sentence-transformers>=2.2.0",
+    "datasets>=2.14.0",
+    "openai>=1.0.0",
+    "pyyaml>=6.0",
+]
+
+[project.optional-dependencies]
+dev = [
+    "pytest>=7.0",
+    "pytest-cov>=4.0",
+    "ruff>=0.1.0",
+]
+
+[tool.setuptools.packages.find]
+include = ["open_disaster_responder*"]
+
+[tool.setuptools.package-dir]
+open_disaster_responder = "."
+
+[tool.ruff]
+line-length = 100
+target-version = "py310"
