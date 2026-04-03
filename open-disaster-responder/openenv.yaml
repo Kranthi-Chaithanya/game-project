@@ -1,0 +1,62 @@
+name: open-disaster-responder
+display_name: "Real-Time Disaster Response Intelligence System"
+version: "1.0.0"
+description: >
+  A multimodal disaster response environment where agents triage crisis reports,
+  dispatch resources on a 100x100 grid, and coordinate emergency operations.
+  Integrates Hugging Face datasets (CrisisMMD), sentence-transformers for NLP,
+  and PyTorch for on-the-fly disaster-spread prediction.
+
+authors:
+  - name: "OpenEnv Developer"
+
+tags:
+  - disaster-response
+  - multimodal
+  - pytorch
+  - huggingface
+  - reinforcement-learning
+  - crisis-management
+
+environment:
+  module: open_disaster_responder.environment
+  class: OpenDisasterResponderEnvironment
+
+tasks:
+  - id: easy_single_disaster
+    name: "Single Disaster - Earthquake Response"
+    description: >
+      Small single earthquake disaster with ~30 incoming reports.
+      Agent must triage reports and dispatch resources efficiently.
+    difficulty: easy
+    max_steps: 50
+    params:
+      disaster_type: earthquake
+      num_reports: 30
+      grid_size: 100
+
+  - id: medium_multi_incident
+    name: "Multi-Incident - Flood & Fire Response"
+    description: >
+      Multi-incident scenario with simultaneous flood and fire affecting
+      different zones. ~80 incoming reports require coordinated response.
+    difficulty: medium
+    max_steps: 100
+    params:
+      disaster_type: multi
+      num_reports: 80
+      grid_size: 100
+
+  - id: hard_evolving_wildfire
+    name: "Evolving Wildfire with Predictive Modeling"
+    description: >
+      Large evolving wildfire with uncertainty. Agent must use
+      TrainPredictorModel to forecast spread with a PyTorch MLP.
+      Graded on triage (40%), PyTorch model AUC (40%), efficiency (20%).
+    difficulty: hard
+    max_steps: 200
+    params:
+      disaster_type: wildfire
+      num_reports: 120
+      grid_size: 100
+      require_predictor: true
