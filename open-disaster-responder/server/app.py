@@ -443,7 +443,7 @@ def _run_auto_baseline(task_name: str) -> tuple:
                 _reward_history.append(reward.value)
                 _cumulative_rewards.append(_cumulative_rewards[-1] + reward.value)
                 _step_history.append(_obs.current_step)
-                if hasattr(action, 'action_type') and action.action_type == "train_predictor_model":
+                if isinstance(action, TrainPredictorModel):
                     if _obs.predictor_metrics and _obs.predictor_metrics.trained:
                         _predictor_auc_history.append(_obs.predictor_metrics.val_auc)
             except Exception:
