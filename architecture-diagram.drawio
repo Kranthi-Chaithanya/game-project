@@ -1,0 +1,383 @@
+<mxfile host="app.diagrams.net" modified="2026-04-06T08:36:00.000Z" agent="draw.io" version="24.0.0" type="device">
+  <diagram id="realm-of-rivals-architecture" name="System Architecture">
+    <mxGraphModel dx="2200" dy="1600" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="0" pageScale="1" pageWidth="1600" pageHeight="1200" math="0" shadow="1">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+
+        <!-- ===== TITLE ===== -->
+        <mxCell id="title" value="&lt;b&gt;Realm of Rivals — Universal Nemesis &amp; Relationship System&lt;/b&gt;&lt;br&gt;Full Architecture Overview" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=20;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="300" y="-20" width="680" height="60" as="geometry" />
+        </mxCell>
+
+        <!-- ===== RELATIONSHIP MANAGER (Central Hub) ===== -->
+        <mxCell id="rm-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#dae8fc;strokeColor=#6c8ebf;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="70" width="560" height="340" as="geometry" />
+        </mxCell>
+        <mxCell id="rm-title" value="&lt;b&gt;RelationshipManager&lt;/b&gt;&lt;br&gt;&lt;i&gt;Central Registry — CRUD + Event Dispatch&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="440" y="80" width="400" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Character class -->
+        <mxCell id="char-box" value="&lt;b&gt;Character&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;padding:4px;&quot;&gt;+ id: string&lt;br&gt;+ name: string&lt;br&gt;+ type: CharacterType&lt;br&gt;+ manager: RelationshipManager&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;shadow=1;fontSize=11;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="390" y="130" width="200" height="120" as="geometry" />
+        </mxCell>
+
+        <!-- Relationship class -->
+        <mxCell id="rel-box" value="&lt;b&gt;Relationship&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;padding:4px;&quot;&gt;+ perspectiveA: RelationshipType&lt;br&gt;+ perspectiveB: RelationshipType&lt;br&gt;+ intensity: [-100, 100]&lt;br&gt;+ history: HistoryEntry[]&lt;br&gt;+ timestamps&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;shadow=1;fontSize=11;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="640" y="130" width="240" height="130" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: Character → Relationship -->
+        <mxCell id="char-rel-arrow" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#6c8ebf;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="char-box" target="rel-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="char-rel-label" value="creates / queries" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#333333;" vertex="1" connectable="0" parent="char-rel-arrow">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- CharacterType enum -->
+        <mxCell id="chartype-box" value="&lt;b&gt;«enum» CharacterType&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;padding:4px;&quot;&gt;Player · NPC · Villain&lt;br&gt;Ally · Neutral · Merchant&lt;br&gt;Mentor · Rival&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#fff2cc;strokeColor=#d6b656;shadow=1;fontSize=11;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="390" y="270" width="180" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- RelationshipType enum -->
+        <mxCell id="reltype-box" value="&lt;b&gt;«enum» RelationshipType&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;padding:4px;&quot;&gt;Nemesis · Rival · Neutral&lt;br&gt;Friend · Ally · Mentor&lt;br&gt;Betrayer&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#d5e8d4;strokeColor=#82b366;shadow=1;fontSize=11;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="640" y="280" width="200" height="100" as="geometry" />
+        </mxCell>
+
+        <!-- Dashed arrows from class to enum -->
+        <mxCell id="char-chartype" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#999999;strokeWidth=1;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="char-box" target="chartype-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rel-reltype" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#999999;strokeWidth=1;dashed=1;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="rel-box" target="reltype-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== EVENT SYSTEM ===== -->
+        <mxCell id="es-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#f8cecc;strokeColor=#b85450;arcSize=8;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="360" y="440" width="560" height="180" as="geometry" />
+        </mxCell>
+        <mxCell id="es-title" value="&lt;b&gt;EventSystem&lt;/b&gt;&lt;br&gt;&lt;i&gt;Processes events, applies deltas, transitions types, fires callbacks&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="400" y="450" width="480" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- RelationshipEvent class -->
+        <mxCell id="revevent-box" value="&lt;b&gt;RelationshipEvent&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;padding:4px;&quot;&gt;+ type: EventType&lt;br&gt;+ source: Character&lt;br&gt;+ target: Character&lt;br&gt;+ description: string&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;shadow=1;fontSize=11;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="390" y="500" width="190" height="105" as="geometry" />
+        </mxCell>
+
+        <!-- EventType enum -->
+        <mxCell id="evtype-box" value="&lt;b&gt;«enum» EventType&lt;/b&gt;&lt;hr&gt;&lt;div style=&quot;text-align:left;padding:4px;&quot;&gt;Combat · Betrayal · Assistance&lt;br&gt;Dialogue · Quest · Trade&lt;br&gt;Defeat · Victory · Gift&lt;br&gt;Theft · Murder · Rescue&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ffe6cc;strokeColor=#d79b00;shadow=1;fontSize=11;verticalAlign=top;" vertex="1" parent="1">
+          <mxGeometry x="640" y="500" width="240" height="105" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: RelationshipEvent → EventType -->
+        <mxCell id="revevent-evtype" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#999999;strokeWidth=1;dashed=1;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="revevent-box" target="evtype-box">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow: RelationshipManager → EventSystem -->
+        <mxCell id="rm-es-arrow" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#b85450;strokeWidth=2;exitX=0.5;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="rm-group" target="es-group">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="rm-es-label" value="dispatches events" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#b85450;fontStyle=1" vertex="1" connectable="0" parent="rm-es-arrow">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== EVENT PROCESSING FLOW ===== -->
+        <mxCell id="flow-title" value="&lt;b&gt;Event Processing Flow&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="450" y="660" width="200" height="30" as="geometry" />
+        </mxCell>
+
+        <mxCell id="flow1" value="&lt;b&gt;1.&lt;/b&gt; Event received" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="130" y="700" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="flow2" value="&lt;b&gt;2.&lt;/b&gt; Apply delta&lt;br&gt;to intensity" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="300" y="700" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="flow3" value="&lt;b&gt;3.&lt;/b&gt; Check threshold&lt;br&gt;transition" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="470" y="700" width="140" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="flow4" value="&lt;b&gt;4.&lt;/b&gt; Fire callbacks" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="650" y="700" width="130" height="40" as="geometry" />
+        </mxCell>
+        <mxCell id="flow5" value="&lt;b&gt;5.&lt;/b&gt; Log to history" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#e1d5e7;strokeColor=#9673a6;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="820" y="700" width="130" height="40" as="geometry" />
+        </mxCell>
+        <!-- Flow arrows -->
+        <mxCell id="f1-f2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="flow1" target="flow2">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f2-f3" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="flow2" target="flow3">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f3-f4" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="flow3" target="flow4">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="f4-f5" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#9673a6;strokeWidth=2;" edge="1" parent="1" source="flow4" target="flow5">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+
+        <!-- ===== INTENSITY THRESHOLDS TABLE ===== -->
+        <mxCell id="thresh-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="790" width="280" height="220" as="geometry" />
+        </mxCell>
+        <mxCell id="thresh-title" value="&lt;b&gt;Relationship Intensity Thresholds&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="100" y="800" width="240" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="thresh-table" value="&lt;table style=&quot;font-size:11px;border-collapse:collapse;width:100%&quot;&gt;&lt;tr style=&quot;background:#dae8fc;&quot;&gt;&lt;th style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;Intensity&lt;/th&gt;&lt;th style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;Type&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;color:#cc0000;&quot;&gt;≤ −80&lt;/td&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;&lt;b&gt;Nemesis&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;color:#cc6600;&quot;&gt;−80 to −30&lt;/td&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;&lt;b&gt;Rival&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;color:#888;&quot;&gt;−30 to +30&lt;/td&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;Neutral&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;color:#007700;&quot;&gt;+30 to +60&lt;/td&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;&lt;b&gt;Friend&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;color:#006600;&quot;&gt;&amp;gt; +60&lt;/td&gt;&lt;td style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;&lt;b&gt;Ally&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="100" y="830" width="240" height="170" as="geometry" />
+        </mxCell>
+
+        <!-- ===== EVENT DELTAS TABLE ===== -->
+        <mxCell id="delta-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#F5F5F5;strokeColor=#666666;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="400" y="790" width="280" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="delta-title" value="&lt;b&gt;Default Event Deltas&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="450" y="800" width="180" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="delta-table" value="&lt;table style=&quot;font-size:11px;border-collapse:collapse;width:100%&quot;&gt;&lt;tr style=&quot;background:#f8cecc;&quot;&gt;&lt;th style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;Event&lt;/th&gt;&lt;th style=&quot;padding:4px;border:1px solid #ccc;&quot;&gt;Delta&lt;/th&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#cc0000;&quot;&gt;Murder&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;&lt;b&gt;−50&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#cc0000;&quot;&gt;Betrayal&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;&lt;b&gt;−40&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#cc6600;&quot;&gt;Theft&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;−20&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#cc6600;&quot;&gt;Defeat&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;−15&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#996600;&quot;&gt;Combat&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;−10&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#007700;&quot;&gt;Dialogue / Trade&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;+5&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#007700;&quot;&gt;Quest / Victory&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;+10&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#006600;&quot;&gt;Gift&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;+15&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#006600;&quot;&gt;Assistance&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;+20&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;color:#006600;&quot;&gt;Rescue&lt;/td&gt;&lt;td style=&quot;padding:3px;border:1px solid #ccc;&quot;&gt;&lt;b&gt;+30&lt;/b&gt;&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;" style="text;html=1;align=center;verticalAlign=top;resizable=0;points=[];strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="415" y="830" width="250" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- ===== LANGUAGE IMPLEMENTATIONS ===== -->
+        <mxCell id="lang-title" value="&lt;b&gt;Multi-Language Implementations&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=14;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="380" y="1140" width="280" height="30" as="geometry" />
+        </mxCell>
+
+        <!-- Python -->
+        <mxCell id="py-box" value="&lt;div style=&quot;text-align:center;&quot;&gt;🐍&lt;br&gt;&lt;b&gt;Python&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px;&quot;&gt;python/&lt;br&gt;Python 3.10+ · pytest&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3776AB;strokeColor=#2B5F8A;fontColor=#FFFFFF;shadow=1;fontSize=12;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1190" width="160" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- C# -->
+        <mxCell id="cs-box" value="&lt;div style=&quot;text-align:center;&quot;&gt;🔷&lt;br&gt;&lt;b&gt;C# (Unity)&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px;&quot;&gt;csharp/&lt;br&gt;.NET 8 SDK&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#68217A;strokeColor=#4B1559;fontColor=#FFFFFF;shadow=1;fontSize=12;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="280" y="1190" width="160" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- TypeScript/JavaScript -->
+        <mxCell id="ts-box" value="&lt;div style=&quot;text-align:center;&quot;&gt;📘&lt;br&gt;&lt;b&gt;TypeScript / JS&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px;&quot;&gt;javascript/&lt;br&gt;Node 18+ · npm&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#3178C6;strokeColor=#245B9C;fontColor=#FFFFFF;shadow=1;fontSize=12;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="480" y="1190" width="160" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- GDScript -->
+        <mxCell id="gd-box" value="&lt;div style=&quot;text-align:center;&quot;&gt;🎮&lt;br&gt;&lt;b&gt;GDScript&lt;/b&gt;&lt;br&gt;&lt;span style=&quot;font-size:10px;&quot;&gt;gdscript/&lt;br&gt;Godot 4.x&lt;/span&gt;&lt;/div&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#478CBF;strokeColor=#2D6A9F;fontColor=#FFFFFF;shadow=1;fontSize=12;arcSize=12;" vertex="1" parent="1">
+          <mxGeometry x="680" y="1190" width="160" height="90" as="geometry" />
+        </mxCell>
+
+        <!-- Arrows from core to implementations -->
+        <mxCell id="core-py" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#666666;strokeWidth=1;dashed=1;exitX=0.25;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="es-group" target="py-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="500" y="1170" />
+              <mxPoint x="160" y="1170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="core-cs" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#666666;strokeWidth=1;dashed=1;exitX=0.4;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="es-group" target="cs-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="584" y="1170" />
+              <mxPoint x="360" y="1170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="core-ts" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#666666;strokeWidth=1;dashed=1;exitX=0.6;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="es-group" target="ts-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="696" y="1170" />
+              <mxPoint x="560" y="1170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="core-gd" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#666666;strokeWidth=1;dashed=1;exitX=0.75;exitY=1;exitDx=0;exitDy=0;entryX=0.5;entryY=0;entryDx=0;entryDy=0;" edge="1" parent="1" source="es-group" target="gd-box">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="780" y="1170" />
+              <mxPoint x="760" y="1170" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== GODOT GAME DEMO ===== -->
+        <mxCell id="godot-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E8F5E9;strokeColor=#43A047;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="720" y="790" width="310" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-title" value="&lt;b&gt;🎮 Realm of Rivals — Godot 4.x Demo&lt;/b&gt;&lt;br&gt;&lt;i&gt;godot-game/&lt;/i&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="740" y="800" width="270" height="40" as="geometry" />
+        </mxCell>
+
+        <mxCell id="godot-main" value="&lt;b&gt;main.gd&lt;/b&gt;&lt;br&gt;GameMain" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="820" y="850" width="100" height="35" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-player" value="&lt;b&gt;player.gd&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="740" y="895" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-npc" value="&lt;b&gt;npc.gd&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="840" y="895" width="90" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-combat" value="&lt;b&gt;combat_manager.gd&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="740" y="935" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-dialogue" value="&lt;b&gt;dialogue_manager.gd&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="740" y="975" width="135" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-map" value="&lt;b&gt;map_generator.gd&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="885" y="935" width="125" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-hud" value="&lt;b&gt;hud.gd&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="940" y="895" width="70" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-faction" value="&lt;b&gt;faction_manager.gd&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="885" y="975" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-legacy" value="&lt;b&gt;legacy_manager.gd&lt;/b&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#C8E6C9;strokeColor=#388E3C;shadow=0;fontSize=10;" vertex="1" parent="1">
+          <mxGeometry x="740" y="1015" width="130" height="30" as="geometry" />
+        </mxCell>
+        <mxCell id="godot-relsys" value="&lt;b&gt;relationship/&lt;/b&gt;&lt;br&gt;&lt;i&gt;(from gdscript/src/)&lt;/i&gt;" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#A5D6A7;strokeColor=#2E7D32;shadow=0;fontSize=10;fontStyle=0;" vertex="1" parent="1">
+          <mxGeometry x="885" y="1015" width="130" height="40" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow from Godot game relationship/ back to core -->
+        <mxCell id="godot-core-link" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#43A047;strokeWidth=2;dashed=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;" edge="1" parent="1" source="godot-relsys" target="es-group">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="1060" y="1035" />
+              <mxPoint x="1060" y="650" />
+              <mxPoint x="640" y="650" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="godot-core-label" value="integrates&lt;br&gt;core system" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#43A047;fontStyle=1;" vertex="1" connectable="0" parent="godot-core-link">
+          <mxGeometry x="0.3" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== DESIGN PRINCIPLES ===== -->
+        <mxCell id="dp-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F9A825;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="1030" width="280" height="140" as="geometry" />
+        </mxCell>
+        <mxCell id="dp-title" value="&lt;b&gt;Design Principles&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="140" y="1040" width="130" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="dp-list" value="&lt;div style=&quot;text-align:left;font-size:11px;padding:4px;&quot;&gt;✅ &lt;b&gt;Universal&lt;/b&gt; — Any character ↔ any character&lt;br&gt;✅ &lt;b&gt;Bidirectional&lt;/b&gt; — Independent perspectives&lt;br&gt;✅ &lt;b&gt;Dynamic&lt;/b&gt; — Evolves via events&lt;br&gt;✅ &lt;b&gt;Historical&lt;/b&gt; — Full interaction history&lt;br&gt;✅ &lt;b&gt;Extensible&lt;/b&gt; — Add types/events easily&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="90" y="1065" width="260" height="95" as="geometry" />
+        </mxCell>
+
+        <!-- ===== SPECIAL CASE: BETRAYER ===== -->
+        <mxCell id="betrayer-note" value="&lt;div style=&quot;text-align:center;font-size:11px;&quot;&gt;⚠️ &lt;b&gt;Special Case&lt;/b&gt;&lt;br&gt;If an &lt;b&gt;Ally/Friend&lt;/b&gt; relationship&lt;br&gt;receives a large negative event&lt;br&gt;(e.g. Betrayal), type transitions&lt;br&gt;to &lt;b style=&quot;color:#cc0000;&quot;&gt;Betrayer&lt;/b&gt; rather than Rival.&lt;/div&gt;" style="shape=note;whiteSpace=wrap;html=1;backgroundOutline=1;size=15;fillColor=#FFF3E0;strokeColor=#E65100;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="80" y="650" width="210" height="110" as="geometry" />
+        </mxCell>
+
+        <!-- ===== GAME FEATURES PANEL ===== -->
+        <mxCell id="features-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#E3F2FD;strokeColor=#1565C0;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="80" y="70" width="240" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="features-title" value="&lt;b&gt;🎮 Game Features&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=13;fontColor=#1A1A2E;" vertex="1" parent="1">
+          <mxGeometry x="120" y="80" width="140" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="features-list" value="&lt;div style=&quot;text-align:left;font-size:11px;padding:6px;line-height:1.6;&quot;&gt;🗺️ Procedural tile-based maps&lt;br&gt;👥 10+ NPCs with unique traits&lt;br&gt;⚔️ Turn-based combat&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(relationships affect power)&lt;br&gt;💬 Dialogue &amp; diplomacy&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(trade, recruit, betray)&lt;br&gt;🛡️ Faction mgmt (party of 4)&lt;br&gt;🔄 Roguelike legacy system&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(nemeses return stronger)&lt;br&gt;📊 Live relationship panel&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;(press R to view)&lt;br&gt;📝 Real-time event log&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="90" y="110" width="220" height="260" as="geometry" />
+        </mxCell>
+
+        <!-- Arrow from Features → Core -->
+        <mxCell id="feat-core" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#1565C0;strokeWidth=2;exitX=1;exitY=0.5;exitDx=0;exitDy=0;entryX=0;entryY=0.5;entryDx=0;entryDy=0;" edge="1" parent="1" source="features-group" target="rm-group">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="feat-core-label" value="powered by" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=10;fontColor=#1565C0;fontStyle=1;" vertex="1" connectable="0" parent="feat-core">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== INTENSITY GAUGE (Visual) ===== -->
+        <mxCell id="gauge-title" value="&lt;b&gt;Intensity Spectrum&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="960" y="80" width="120" height="25" as="geometry" />
+        </mxCell>
+        <!-- Red zone -->
+        <mxCell id="gauge-red" value="−100" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FF1744;strokeColor=none;fontColor=#fff;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="960" y="110" width="40" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-orange" value="−80" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FF6D00;strokeColor=none;fontColor=#fff;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1000" y="110" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-yellow" value="−30" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#FFD600;strokeColor=none;fontColor=#333;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1030" y="110" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-gray" value="0" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#BDBDBD;strokeColor=none;fontColor=#333;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1060" y="110" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-lightgreen" value="+30" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#76FF03;strokeColor=none;fontColor=#333;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1090" y="110" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-green" value="+60" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#00C853;strokeColor=none;fontColor=#fff;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1120" y="110" width="30" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-darkgreen" value="+100" style="rounded=0;whiteSpace=wrap;html=1;fillColor=#00695C;strokeColor=none;fontColor=#fff;fontSize=9;" vertex="1" parent="1">
+          <mxGeometry x="1150" y="110" width="40" height="25" as="geometry" />
+        </mxCell>
+        <!-- Gauge labels -->
+        <mxCell id="gauge-lbl-nemesis" value="Nemesis" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=9;fontColor=#CC0000;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="138" width="50" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-lbl-rival" value="Rival" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=9;fontColor=#CC6600;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1005" y="138" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-lbl-neutral" value="Neutral" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=9;fontColor=#666;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1045" y="138" width="50" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-lbl-friend" value="Friend" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=9;fontColor=#007700;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1095" y="138" width="40" height="18" as="geometry" />
+        </mxCell>
+        <mxCell id="gauge-lbl-ally" value="Ally" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];strokeColor=none;fillColor=none;fontSize=9;fontColor=#006600;fontStyle=1;" vertex="1" parent="1">
+          <mxGeometry x="1145" y="138" width="40" height="18" as="geometry" />
+        </mxCell>
+
+        <!-- ===== BIDIRECTIONAL RELATIONSHIP EXAMPLE ===== -->
+        <mxCell id="bidir-title" value="&lt;b&gt;Bidirectional Perspectives Example&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=11;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="960" y="180" width="230" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="bidir-charA" value="&lt;b&gt;Hero&lt;/b&gt;&lt;br&gt;(Player)" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#FFF9C4;strokeColor=#F57F17;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="960" y="215" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bidir-charB" value="&lt;b&gt;Dark Lord&lt;/b&gt;&lt;br&gt;(Villain)" style="shape=ellipse;whiteSpace=wrap;html=1;fillColor=#FFCDD2;strokeColor=#C62828;shadow=1;fontSize=11;" vertex="1" parent="1">
+          <mxGeometry x="1110" y="215" width="80" height="60" as="geometry" />
+        </mxCell>
+        <mxCell id="bidir-arrow1" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#C62828;strokeWidth=2;exitX=1;exitY=0.3;exitDx=0;exitDy=0;entryX=0;entryY=0.3;entryDx=0;entryDy=0;" edge="1" parent="1" source="bidir-charA" target="bidir-charB">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bidir-lbl1" value="sees as: &lt;b style=&quot;color:#CC0000&quot;&gt;Nemesis&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;" vertex="1" connectable="0" parent="bidir-arrow1">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint y="-8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="bidir-arrow2" style="edgeStyle=orthogonalEdgeStyle;rounded=1;strokeColor=#E65100;strokeWidth=2;exitX=0;exitY=0.7;exitDx=0;exitDy=0;entryX=1;entryY=0.7;entryDx=0;entryDy=0;" edge="1" parent="1" source="bidir-charB" target="bidir-charA">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="bidir-lbl2" value="sees as: &lt;b style=&quot;color:#CC6600&quot;&gt;Rival&lt;/b&gt;" style="edgeLabel;html=1;align=center;verticalAlign=middle;resizable=0;points=[];fontSize=9;" vertex="1" connectable="0" parent="bidir-arrow2">
+          <mxGeometry x="-0.1" relative="1" as="geometry">
+            <mxPoint y="8" as="offset" />
+          </mxGeometry>
+        </mxCell>
+
+        <!-- ===== PROJECT FILE STRUCTURE ===== -->
+        <mxCell id="struct-group" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=#ECEFF1;strokeColor=#607D8B;arcSize=6;shadow=1;" vertex="1" parent="1">
+          <mxGeometry x="960" y="310" width="230" height="310" as="geometry" />
+        </mxCell>
+        <mxCell id="struct-title" value="&lt;b&gt;📁 Project Structure&lt;/b&gt;" style="text;html=1;align=center;verticalAlign=middle;resizable=0;points=[];autosize=1;strokeColor=none;fillColor=none;fontSize=12;fontColor=#333;" vertex="1" parent="1">
+          <mxGeometry x="1010" y="320" width="140" height="25" as="geometry" />
+        </mxCell>
+        <mxCell id="struct-tree" value="&lt;div style=&quot;text-align:left;font-size:10px;font-family:monospace;padding:4px;line-height:1.5;&quot;&gt;game-project/&lt;br&gt;├── README.md&lt;br&gt;├── python/&lt;br&gt;│ &amp;nbsp; ├── character.py&lt;br&gt;│ &amp;nbsp; ├── relationship.py&lt;br&gt;│ &amp;nbsp; ├── event.py&lt;br&gt;│ &amp;nbsp; ├── event_system.py&lt;br&gt;│ &amp;nbsp; ├── relationship_manager.py&lt;br&gt;│ &amp;nbsp; └── tests/&lt;br&gt;├── csharp/&lt;br&gt;│ &amp;nbsp; ├── NemesisSystem/&lt;br&gt;│ &amp;nbsp; └── NemesisSystem.Tests/&lt;br&gt;├── javascript/&lt;br&gt;│ &amp;nbsp; ├── src/&lt;br&gt;│ &amp;nbsp; └── tests/&lt;br&gt;├── gdscript/&lt;br&gt;│ &amp;nbsp; ├── src/&lt;br&gt;│ &amp;nbsp; └── examples/&lt;br&gt;└── godot-game/&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;├── scenes/&lt;br&gt;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;└── scripts/&lt;/div&gt;" style="text;html=1;align=left;verticalAlign=top;resizable=0;points=[];strokeColor=none;fillColor=none;" vertex="1" parent="1">
+          <mxGeometry x="970" y="345" width="210" height="270" as="geometry" />
+        </mxCell>
+
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
